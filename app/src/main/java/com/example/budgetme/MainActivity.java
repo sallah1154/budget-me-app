@@ -1,6 +1,9 @@
 package com.example.budgetme;
 
 import android.os.Bundle;
+import android.content.Intent;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +22,16 @@ public class MainActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        FrameLayout addTransactionBtn = findViewById(R.id.btn_grocery);
+        addTransactionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open AddTransactionActivity when the grocery icon is clicked
+                Intent intent = new Intent(MainActivity.this, AddTransactionActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }
