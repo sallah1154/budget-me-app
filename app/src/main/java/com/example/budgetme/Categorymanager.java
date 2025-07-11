@@ -11,11 +11,7 @@ public class Categorymanager {
         initializeDefaultCategories();
     }
     private void initializeDefaultCategories() {
-        // Default expense categories
-        categories.add(new Category("Food & Dining", "restaurant"));
-
-        // Default income categories
-        categories.add(new Category("Salary", "work"));
+        //TODO: add default categories
     }
      public void addCategory(Category category){
         categories.add(category);

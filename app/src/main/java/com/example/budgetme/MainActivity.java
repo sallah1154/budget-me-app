@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         addTransactionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Open AddTransactionActivity when the grocery icon is clicked
+                // Open AddTransactionActivity when the icon is clicked
                 Intent intent = new Intent(MainActivity.this, AddTransactionActivity.class);
                 startActivity(intent);
             }
