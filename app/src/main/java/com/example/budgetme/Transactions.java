@@ -1,7 +1,9 @@
 package com.example.budgetme;
 
 public class Transactions {
-    private String type;       // "Income" or "Expense"
+    private String type;// "Income" or "Expense"
+    long income;
+    long expenses;
     private String description;
     private double amount;
 
