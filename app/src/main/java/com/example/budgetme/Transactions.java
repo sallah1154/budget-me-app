@@ -17,29 +17,39 @@ public class Transactions {
 
     @ColumnInfo(name = "Type")
     private String type;       // "Income" or "Expense"
+
+    /*
     @ColumnInfo(name = "description")
     private String description;
+
+     */
     @ColumnInfo(name = "amount")
     private double amount;
     @ColumnInfo(name = "Category")
     private Category category;
     @ColumnInfo(name = "Date")
     private Date date;
+    @ColumnInfo(name = "name")
+    private String name;
 
-    public Transactions(String type, String description, double amount) {
+
+    public Transactions(String type, String name, double amount) {
         this.type = type;
-        this.description = description;
+        //this.description = description;
         this.amount = amount;
+        this.name = name;
 
     }
 
     public String getType() {
         return type;
     }
-
+/*
     public String getDescription() {
         return description;
     }
+
+ */
 
     public double getAmount() {
         return amount;
@@ -65,5 +75,13 @@ public class Transactions {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

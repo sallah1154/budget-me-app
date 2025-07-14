@@ -68,6 +68,22 @@
                 android:inputType="numberDecimal"
                 android:background="@android:drawable/edit_text"
                 android:padding="12dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transaction Type"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/input_transaction_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="&quot;expense&quot; or &quot;income&quot;"
+                android:inputType="text"
+                android:background="@android:drawable/edit_text"
+                android:padding="12dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
