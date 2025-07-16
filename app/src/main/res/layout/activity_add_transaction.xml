@@ -113,112 +113,14 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp" />
 
-            <HorizontalScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_categories"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:clipToPadding="false" />
 
-                <LinearLayout
-                    android:id="@+id/category_options"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginEnd="16dp">
-
-                        <FrameLayout
-                            android:id="@+id/btn_category_groceries"
-                            android:layout_width="72dp"
-                            android:layout_height="72dp"
-                            android:background="@drawable/blue_circle"
-                            android:clickable="true"
-                            android:focusable="true">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_money"
-                                android:contentDescription="Groceries" />
-                        </FrameLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Groceries"
-                            android:textSize="12sp"
-                            android:layout_marginTop="4dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginEnd="16dp">
-
-                        <FrameLayout
-                            android:id="@+id/btn_category_car"
-                            android:layout_width="72dp"
-                            android:layout_height="72dp"
-                            android:background="@drawable/blue_circle"
-                            android:clickable="true"
-                            android:focusable="true">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_money"
-                                android:contentDescription="Car" />
-                        </FrameLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Car"
-                            android:textSize="12sp"
-                            android:layout_marginTop="4dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginEnd="16dp">
-
-                        <FrameLayout
-                            android:id="@+id/btn_category_house"
-                            android:layout_width="72dp"
-                            android:layout_height="72dp"
-                            android:background="@drawable/blue_circle"
-                            android:clickable="true"
-                            android:focusable="true">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_money"
-                                android:contentDescription="House" />
-                        </FrameLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="House"
-                            android:textSize="12sp"
-                            android:layout_marginTop="4dp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
