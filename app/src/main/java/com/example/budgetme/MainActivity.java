@@ -4,14 +4,18 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView showtransaction;
+    private TransactionViewModel vmodel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,5 +37,28 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        showtransaction = findViewById(R.id.show_transaction);
+        vmodel = new ViewModelProvider(this).get(TransactionViewModel.class);
+        Transactions testdata = new Transactions("expense","food",2.00);
+        new Thread(()-> vmodel.insert(testdata)).start();
+
+        vmodel.getAllTransactions().observe(this,transactions ->{
+            if(transactions == null || transactions.isEmpty()){
+                return;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for(Transactions t : transactions){
+                sb.append("type: ").append(t.getType()).append("\n")
+                        .append("name: ").append(t.getName()).append("\n")
+                        .append("amount: ").append(t.getAmount()).append("\n");
+
+            }
+            showtransaction.setText(sb.toString());
+        });
+
+
+
     }
 }
