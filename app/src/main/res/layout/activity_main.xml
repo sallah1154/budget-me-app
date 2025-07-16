@@ -126,4 +126,16 @@
         app:layout_constraintHeight_percent="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/transactions_title" />
+<!--    this is for debugging until the recycler view in fully implemented-->
+    <TextView
+        android:id = "@+id/show_transaction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="50dp"
+
+        app:layout_constraintTop_toTopOf="@id/transactions_recycler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

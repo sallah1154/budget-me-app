@@ -2,6 +2,9 @@ package com.example.budgetme;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +13,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.lifecycle.ViewModelProvider;
+
 
 
 public class AddTransactionActivity extends AppCompatActivity {
     private Category selectedCategory;
+    private TransactionViewModel tViewModel;
 
     private void loadCategoryRecycler() {
         RecyclerView recyclerView = findViewById(R.id.recycler_view_categories);
@@ -51,9 +57,48 @@ public class AddTransactionActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        EditText TypeEditText = findViewById(R.id.input_transaction_type);
+
+        EditText AmountEditText = findViewById(R.id.input_transaction_amount);
+        EditText TransactionNameEditText = findViewById(R.id.input_transaction_name);
+        Button addTransactionButton = findViewById(R.id.btn_add_transaction);
+
+        tViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
+
         loadCategoryRecycler();
 
+        addTransactionButton.setOnClickListener(v->{
+            String type = TypeEditText.getText().toString();
+            String amount = AmountEditText.getText().toString();
+            String transactionname = TransactionNameEditText.getText().toString();
 
+            if(type.isEmpty() || amount.isEmpty() || transactionname.isEmpty()){
+                Toast.makeText(this,"all fields are not filled out",Toast.LENGTH_LONG).show();
+            }
+
+
+            double damount;
+            try {
+                damount = Double.parseDouble(amount);
+            } catch(NumberFormatException e){
+                Toast.makeText(this,"invalid amount",Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if (selectedCategory == null) {
+                Toast.makeText(this, "Please select a category.", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            Transactions transaction = new Transactions(type,transactionname,damount,selectedCategory);
+
+            tViewModel.insert(transaction);
+
+            Toast.makeText(this,"Transaction added",Toast.LENGTH_LONG).show();
+            finish();
+
+
+        });
     }
     @Override
     public boolean onSupportNavigateUp() {
