@@ -23,11 +23,13 @@ public class TransactionRepository {
     }
 
     void insert(Transactions transaction){
-        Executors.newSingleThreadExecutor().execute(()->{ transactionDao.insertTransaction(transaction);});
+        appDatabase.databaseWriteExecutor.execute(() ->{
+            transactionDao.insertTransaction(transaction);
+        });
     }
 
     void delete(Transactions transaction){
-        Executors.newSingleThreadExecutor().execute(()->{
+        appDatabase.databaseWriteExecutor.execute(()->{
             transactionDao.deleteTransaction(transaction);
         });
     }

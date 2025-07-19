@@ -3,6 +3,7 @@ package com.example.budgetme;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -12,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     private TextView showtransaction;
@@ -38,10 +41,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button LogOutButton = findViewById(R.id.Log_out_Button);
+        LogOutButton.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(MainActivity.this,EmailPasswordActivity.class);
+            startActivity(intent);
+        });
+
         showtransaction = findViewById(R.id.show_transaction);
         vmodel = new ViewModelProvider(this).get(TransactionViewModel.class);
-        Transactions testdata = new Transactions("expense","food",2.00);
-        new Thread(()-> vmodel.insert(testdata)).start();
+
+
 
         vmodel.getAllTransactions().observe(this,transactions ->{
             if(transactions == null || transactions.isEmpty()){
