@@ -15,7 +15,7 @@ public class Category {
         this.iconName = iconName;
     }
     public String getName() {return name;}
-    public String getIconName() {return name;}
+    public String getIconName() {return iconName;}
 
     @Override
     public String toString(){
