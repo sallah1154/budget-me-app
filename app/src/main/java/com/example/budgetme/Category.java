@@ -10,15 +10,21 @@ public class Category {
     @ColumnInfo(name = "iconName")
     private String iconName;
 
-    public Category(String name,  String iconName){
+    public Category(String name, String iconName) {
         this.name = name;
         this.iconName = iconName;
     }
-    public String getName() {return name;}
-    public String getIconName() {return name;}
+
+    public String getName() {
+        return name;
+    }
+
+    public String getIconName() {
+        return iconName; // Fixed to return iconName instead of name
+    }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 }

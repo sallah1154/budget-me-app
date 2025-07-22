@@ -1,11 +1,8 @@
 package com.example.budgetme;
 
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +10,19 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
+
 public class MainActivity extends AppCompatActivity {
-    private TextView showtransaction;
     private TransactionViewModel vmodel;
+    private transactionAdaptor adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,44 +35,36 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        FrameLayout addTransactionBtn = findViewById(R.id.btn_grocery);
-        addTransactionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open AddTransactionActivity when the icon is clicked
-                Intent intent = new Intent(MainActivity.this, AddTransactionActivity.class);
-                startActivity(intent);
-            }
-        });
+        // Initialize RecyclerView and adapter
+        RecyclerView recyclerView = findViewById(R.id.transaction_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new transactionAdaptor();
+        recyclerView.setAdapter(adapter);
 
-        Button LogOutButton = findViewById(R.id.Log_out_Button);
-        LogOutButton.setOnClickListener(view -> {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(MainActivity.this,EmailPasswordActivity.class);
+        // Floating Action Button for adding transactions
+        FloatingActionButton addTransactionBtn = findViewById(R.id.btn_add_transaction);
+        addTransactionBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddTransactionActivity.class);
             startActivity(intent);
         });
 
-        showtransaction = findViewById(R.id.show_transaction);
-        vmodel = new ViewModelProvider(this).get(TransactionViewModel.class);
-
-
-
-        vmodel.getAllTransactions().observe(this,transactions ->{
-            if(transactions == null || transactions.isEmpty()){
-                return;
-            }
-
-            StringBuilder sb = new StringBuilder();
-            for(Transactions t : transactions){
-                sb.append("type: ").append(t.getType()).append("\n")
-                        .append("name: ").append(t.getName()).append("\n")
-                        .append("amount: ").append(t.getAmount()).append("\n");
-
-            }
-            showtransaction.setText(sb.toString());
+        // Logout button
+        com.google.android.material.button.MaterialButton logOutButton = findViewById(R.id.Log_out_Button);
+        logOutButton.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(MainActivity.this, EmailPasswordActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-
-
+        // Observe transactions
+        vmodel = new ViewModelProvider(this).get(TransactionViewModel.class);
+        vmodel.getAllTransactions().observe(this, transactions -> {
+            if (transactions == null || transactions.isEmpty()) {
+                adapter.setTransactions(new ArrayList<>());
+                return;
+            }
+            adapter.setTransactions(transactions);
+        });
     }
 }
