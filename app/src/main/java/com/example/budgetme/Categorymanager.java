@@ -4,11 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Categorymanager {
+    private static Categorymanager instance;
     private List<Category> categories;
 
     public Categorymanager(){
         this.categories = new ArrayList<>();
         initializeDefaultCategories();
+    }
+    public static synchronized Categorymanager getInstance() {
+        if (instance == null) {
+            instance = new Categorymanager();
+        }
+        return instance;
     }
     private void initializeDefaultCategories() {
         //TODO: add default categories

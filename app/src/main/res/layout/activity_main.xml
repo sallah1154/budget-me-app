@@ -90,6 +90,22 @@
         </HorizontalScrollView>
 
         <FrameLayout
+            android:id="@+id/btn_category"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:background="@drawable/blue_circle"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_label" />
+
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/btn_grocery"
             android:layout_width="72dp"
             android:layout_height="72dp"

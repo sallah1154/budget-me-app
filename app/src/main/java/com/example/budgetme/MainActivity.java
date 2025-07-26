@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,13 +29,23 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        FrameLayout addTransactionBtn = findViewById(R.id.btn_grocery);
-        addTransactionBtn.setOnClickListener(new View.OnClickListener() {
+            FrameLayout addTransactionBtn = findViewById(R.id.btn_grocery);
+            addTransactionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Open AddTransactionActivity when the icon is clicked
                 Intent intent = new Intent(MainActivity.this, AddTransactionActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        FrameLayout addCategoryBtn = findViewById(R.id.btn_category);
+        addCategoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open AddTransactionActivity when the icon is clicked
+                Intent intent2 = new Intent(MainActivity.this, AddCategoryActivity.class);
+                startActivity(intent2);
             }
         });
 
@@ -47,12 +58,14 @@ public class MainActivity extends AppCompatActivity {
             if(transactions == null || transactions.isEmpty()){
                 return;
             }
-
             StringBuilder sb = new StringBuilder();
             for(Transactions t : transactions){
                 sb.append("type: ").append(t.getType()).append("\n")
                         .append("name: ").append(t.getName()).append("\n")
-                        .append("amount: ").append(t.getAmount()).append("\n");
+                        .append("amount: ").append(t.getAmount()).append("\n")
+                        .append("category: ")
+                        .append(t.getCategory() != null ? t.getCategory().getName() : "none")
+                        .append("\n");
 
             }
             showtransaction.setText(sb.toString());

@@ -25,7 +25,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view_categories);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        Categorymanager categoryManager = new Categorymanager();
+        Categorymanager categoryManager = Categorymanager.getInstance();
 
         CategoryAdapter adapter = new CategoryAdapter(
                 this,
