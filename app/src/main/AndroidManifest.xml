@@ -16,11 +16,14 @@
             android:name=".AddTransactionActivity"
             android:exported="false" />
         <activity
+            android:name=".MainActivity" 
+            android:exported="false"/>
+        <activity
             android:name=".AddCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".EmailPasswordActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
