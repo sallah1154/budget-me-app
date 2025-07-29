@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "672498317708",
+    "firebase_url": "https://pts-firebase-default-rtdb.firebaseio.com",
+    "project_id": "pts-firebase",
+    "storage_bucket": "pts-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672498317708:android:89f29f1678180d5d5efea9",
+        "android_client_info": {
+          "package_name": "com.example.projecttoimport"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHM9blZT7OQD8IbDLWFq9u254kY_H6UsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

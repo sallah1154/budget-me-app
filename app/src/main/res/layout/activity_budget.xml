@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8F5E8"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- App Title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BUDGET ME"
+            android:textSize="30sp"
+            android:textColor="#2E7D32"
+            android:gravity="center" />
+
+        <!-- Monthly Budget Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp"
+            android:radius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="#FFFAF0">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Monthly Budget"
+                    android:textSize="16sp"
+                    android:textColor="#666666" />
+
+                <EditText
+                    android:id="@+id/etMonthlyBudget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:hint="$0.00"
+                    android:inputType="numberDecimal"
+                    android:textColor="#1976D2"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Amount Spent Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp"
+            android:radius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="left"
+                android:background="#FFEBEE">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Spent"
+                    android:textSize="16sp"
+                    android:textColor="#666666"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etTotalSpent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="$0.00"
+                    android:textSize="32sp"
+                    android:textColor="#D32F2F"
+                    android:textStyle="bold"
+                    android:inputType="numberDecimal"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Row for Groceries and Entertainment -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <!-- Groceries Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:elevation="4dp"
+                android:radius="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="left"
+                    android:background="#FFF8E1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Groceries"
+                        android:textSize="14sp"
+                        android:textColor="#666666" />
+
+                    <EditText
+                        android:id="@+id/etGroceries"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="$0.00"
+                        android:textSize="20sp"
+                        android:textColor="#FF8F00"
+                        android:textStyle="bold"
+                        android:inputType="numberDecimal"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Entertainment Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:elevation="4dp"
+                android:radius="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="left"
+                    android:background="#F3E5F5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Entertainment"
+                        android:textSize="14sp"
+                        android:textColor="#666666" />
+
+                    <EditText
+                        android:id="@+id/etEntertainment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="$0.00"
+                        android:textSize="20sp"
+                        android:textColor="#7B1FA2"
+                        android:textStyle="bold"
+                        android:inputType="numberDecimal"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <!-- Remaining Budget Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:elevation="4dp"
+            android:radius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="#E8F5E8">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Remaining Budget"
+                    android:textSize="18sp"
+                    android:textColor="#666666" />
+
+                <EditText
+                    android:id="@+id/etRemaining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="$0.00"
+                    android:textSize="36sp"
+                    android:textColor="#2E7D32"
+                    android:textStyle="bold"
+                    android:inputType="numberDecimal"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>
