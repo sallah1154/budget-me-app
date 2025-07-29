@@ -48,4 +48,5 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
     implementation("com.google.firebase:firebase-auth")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
