@@ -15,11 +15,14 @@
         <activity
             android:name=".AddTransactionActivity"
             android:exported="false" />
-        <activity android:name=".MainActivity" android:exported = "false">
-
-        </activity>
-        <activity android:name=".BudgetActivity" />
-
+        <activity 
+            android:name=".MainActivity" 
+            android:exported = "false" />
+        <activity 
+            android:name=".BudgetActivity" />
+        <activity
+            android:name=".AddCategoryActivity"
+            android:exported="false" />
         <activity
             android:name=".EmailPasswordActivity"
             android:exported="true">

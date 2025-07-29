@@ -1,20 +1,24 @@
 package com.example.budgetme;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.lifecycle.ViewModelProvider;
 
+
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class AddTransactionActivity extends AppCompatActivity {
@@ -25,22 +29,23 @@ public class AddTransactionActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view_categories);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        Categorymanager categoryManager = new Categorymanager();
+        Categorymanager categoryManager = Categorymanager.getInstance();
 
-        CategoryAdapter adapter = new CategoryAdapter(
-                this,
-                categoryManager.getCategories(),
-                new OnCategoryClickListener() {
-                    @Override
-                    public void onCategoryClick(Category category) {
-                        selectedCategory = category;
-                        Log.d("AddTransactionActivity", "Selected category: " + category.getName());
-                    }
-                }
-        );
-        recyclerView.setAdapter(adapter);
+        CategoryRepository repo = new CategoryRepository(getApplication());
+        List<Category> combinedList = new ArrayList<>(categoryManager.getCategories());
+
+        repo.getAllCategories().observe(this, userCategories -> {
+            combinedList.addAll(userCategories); // Combine user-defined with defaults
+
+            CategoryAdapter adapter = new CategoryAdapter(
+                    AddTransactionActivity.this,
+                    combinedList,
+                    category -> selectedCategory = category
+            );
+
+            recyclerView.setAdapter(adapter);
+        });
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +58,15 @@ public class AddTransactionActivity extends AppCompatActivity {
             return insets;
         });
 
-        if(getSupportActionBar() !=null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        EditText TypeEditText = findViewById(R.id.input_transaction_type);
+
+        AutoCompleteTextView typeEditText = findViewById(R.id.input_transaction_type);
+        String[] transactionTypes = {"Income", "Expense"};
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, transactionTypes);
+        typeEditText.setAdapter(typeAdapter);
 
         EditText AmountEditText = findViewById(R.id.input_transaction_amount);
         EditText TransactionNameEditText = findViewById(R.id.input_transaction_name);
@@ -68,14 +77,13 @@ public class AddTransactionActivity extends AppCompatActivity {
         loadCategoryRecycler();
 
         addTransactionButton.setOnClickListener(v->{
-            String type = TypeEditText.getText().toString();
+            String type = typeEditText.getText().toString();
             String amount = AmountEditText.getText().toString();
             String transactionname = TransactionNameEditText.getText().toString();
 
             if(type.isEmpty() || amount.isEmpty() || transactionname.isEmpty()){
                 Toast.makeText(this,"all fields are not filled out",Toast.LENGTH_LONG).show();
             }
-
 
             double damount;
             try {
@@ -91,15 +99,13 @@ public class AddTransactionActivity extends AppCompatActivity {
             }
 
             Transactions transaction = new Transactions(type,transactionname,damount,selectedCategory);
-
             tViewModel.insert(transaction);
 
             Toast.makeText(this,"Transaction added",Toast.LENGTH_LONG).show();
             finish();
-
-
         });
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         finish();

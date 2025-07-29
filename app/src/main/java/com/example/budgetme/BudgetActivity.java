@@ -14,6 +14,9 @@ public class BudgetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // Link XML IDs
         etMonthlyBudget = findViewById(R.id.etMonthlyBudget);
@@ -59,5 +62,10 @@ public class BudgetActivity extends AppCompatActivity {
         } catch (NumberFormatException e) {
             return 0.0;
         }
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

@@ -5,10 +5,17 @@ import java.util.List;
 
 public class Categorymanager {
     private List<Category> categories;
+    private static Categorymanager instance;
 
     public Categorymanager(){
         this.categories = new ArrayList<>();
         initializeDefaultCategories();
+    }
+    public static synchronized Categorymanager getInstance() {
+        if (instance == null) {
+            instance = new Categorymanager();
+        }
+        return instance;
     }
     private void initializeDefaultCategories() {
         //TODO: add default categories
@@ -18,16 +25,17 @@ public class Categorymanager {
         categories.add(new Category("Water Bill", "ic_piping"));
         categories.add(new Category("Groceries", "ic_shopping"));
         categories.add(new Category("Car Payment", "ic_car"));
-
     }
-     public void addCategory(Category category){
-        categories.add(category);
-     }
-     public boolean removeCategory(String categoryName){
-         return categories.removeIf(category -> category.getName().equals(categoryName));
-     }
 
-     public List<Category> getCategories(){
+    public void addCategory(Category category) {
+        categories.add(category);
+    }
+
+    public boolean removeCategory(String categoryName) {
+        return categories.removeIf(category -> category.getName().equals(categoryName));
+    }
+
+    public List<Category> getCategories() {
         return categories;
-     }
+    }
 }
