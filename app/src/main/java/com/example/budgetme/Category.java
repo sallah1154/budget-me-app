@@ -2,9 +2,12 @@ package com.example.budgetme;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
 public class Category {
+    @PrimaryKey(autoGenerate = true)
+    public int uid;
     @ColumnInfo(name = "name")
     private String name;
     @ColumnInfo(name = "iconName")

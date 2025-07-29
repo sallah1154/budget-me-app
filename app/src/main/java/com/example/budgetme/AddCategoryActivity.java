@@ -38,8 +38,10 @@ public class AddCategoryActivity extends AppCompatActivity {
                 }
 
                 Category newCategory = new Category(categoryName, iconName);
+                CategoryRepository repo = new CategoryRepository(getApplication());
+                repo.insert(newCategory);
 
-                Categorymanager.getInstance().addCategory(newCategory);
+//                Categorymanager.getInstance().addCategory(newCategory); // removed since we can just use the DB
 
                 Toast.makeText(AddCategoryActivity.this, "Category added", Toast.LENGTH_SHORT).show();
 

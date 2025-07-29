@@ -10,11 +10,12 @@ import androidx.room.TypeConverters;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Transactions.class},version =2,exportSchema = false)
+@Database(entities = {Transactions.class,Category.class},version =2,exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class appDatabase extends RoomDatabase {
     public static volatile appDatabase INSTANCE;
     public abstract TransactionDao transactionDao();
+    public abstract  CategoryDAO categoryDao();
     private static final int NUMBER_OF_THREADS = 4;
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);

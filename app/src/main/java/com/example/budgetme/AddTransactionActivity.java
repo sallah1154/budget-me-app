@@ -1,10 +1,11 @@
 package com.example.budgetme;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,10 +15,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import com.google.android.material.textfield.TextInputEditText;
 
+
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class AddTransactionActivity extends AppCompatActivity {
@@ -30,18 +31,20 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         Categorymanager categoryManager = Categorymanager.getInstance();
 
-        CategoryAdapter adapter = new CategoryAdapter(
-                this,
-                categoryManager.getCategories(),
-                new OnCategoryClickListener() {
-                    @Override
-                    public void onCategoryClick(Category category) {
-                        selectedCategory = category;
-                        Log.d("AddTransactionActivity", "Selected category: " + category.getName());
-                    }
-                }
-        );
-        recyclerView.setAdapter(adapter);
+        CategoryRepository repo = new CategoryRepository(getApplication());
+        List<Category> combinedList = new ArrayList<>(categoryManager.getCategories());
+
+        repo.getAllCategories().observe(this, userCategories -> {
+            combinedList.addAll(userCategories); // Combine user-defined with defaults
+
+            CategoryAdapter adapter = new CategoryAdapter(
+                    AddTransactionActivity.this,
+                    combinedList,
+                    category -> selectedCategory = category
+            );
+
+            recyclerView.setAdapter(adapter);
+        });
     }
 
     @Override
