@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/colorSurface"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Transaction Name -->
+        <TextView
+            android:id="@+id/transaction_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Transaction Name"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorTextPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/transaction_amount"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+        <!-- Transaction Amount -->
+        <TextView
+            android:id="@+id/transaction_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$0.00"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="@id/transaction_name"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Transaction Type -->
+        <TextView
+            android:id="@+id/transaction_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textSize="14sp"
+            android:textColor="@color/colorTextSecondary"
+            app:layout_constraintTop_toBottomOf="@id/transaction_name"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Transaction Category -->
+        <TextView
+            android:id="@+id/transaction_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:textSize="14sp"
+            android:textColor="@color/colorTextSecondary"
+            app:layout_constraintTop_toBottomOf="@id/transaction_type"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

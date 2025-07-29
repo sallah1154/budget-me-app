@@ -14,8 +14,14 @@ public class Category {
         this.name = name;
         this.iconName = iconName;
     }
-    public String getName() {return name;}
-    public String getIconName() {return name;}
+
+    public String getName() {
+        return name;
+    }
+
+    public String getIconName() {
+        return iconName; // Fixed to return iconName instead of name
+    }
 
     @Override
     public String toString(){

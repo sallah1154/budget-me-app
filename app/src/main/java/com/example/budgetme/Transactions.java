@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.Query;
+import androidx.room.Ignore;
 
 import java.util.Date;
 import java.util.List;
@@ -39,6 +40,13 @@ public class Transactions {
         this.amount = amount;
         this.name = name;
 
+    }
+@Ignore
+    public Transactions(String type, String name, double amount,Category category){
+        this.type = type;
+        this.amount = amount;
+        this.name = name;
+        this.category = category;
     }
 
     public String getType() {
