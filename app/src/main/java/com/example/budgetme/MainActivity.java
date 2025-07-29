@@ -2,10 +2,9 @@ package com.example.budgetme;
 
 import android.os.Bundle;
 import android.content.Intent;
-import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +12,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
-    private TextView showtransaction;
     private TransactionViewModel vmodel;
+    private transactionAdaptor adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,44 +34,54 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        FrameLayout addTransactionBtn = findViewById(R.id.btn_grocery);
-        addTransactionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open AddTransactionActivity when the icon is clicked
-                Intent intent = new Intent(MainActivity.this, AddTransactionActivity.class);
-                startActivity(intent);
-            }
-        });
+        TextView totalBudgetText = findViewById(R.id.summary_total_budget);
+        TextView spentText = findViewById(R.id.summary_spent);
+        TextView remainingText = findViewById(R.id.summary_remaining);
 
-        Button LogOutButton = findViewById(R.id.Log_out_Button);
-        LogOutButton.setOnClickListener(view -> {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(MainActivity.this,EmailPasswordActivity.class);
+        // Initialize RecyclerView and adapter
+        RecyclerView recyclerView = findViewById(R.id.transaction_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new transactionAdaptor();
+        recyclerView.setAdapter(adapter);
+
+        // adding transactions
+        FrameLayout addTransactionBtn = findViewById(R.id.btn_add_transaction);
+        addTransactionBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddTransactionActivity.class);
             startActivity(intent);
         });
 
-        showtransaction = findViewById(R.id.show_transaction);
+        //add category button
+        FrameLayout addCategoryBtn = findViewById(R.id.btn_category);
+        addCategoryBtn.setOnClickListener(v -> {
+            Intent intent2 = new Intent(MainActivity.this, AddCategoryActivity.class);
+            startActivity(intent2);
+        });
+
+        Button btnBudget = findViewById(R.id.btnBudget);
+        btnBudget.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, BudgetActivity.class);
+            startActivity(intent);
+        });
+
+        // Logout button
+        com.google.android.material.button.MaterialButton logOutButton = findViewById(R.id.Log_out_Button);
+        logOutButton.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent3 = new Intent(MainActivity.this, EmailPasswordActivity.class);
+            startActivity(intent3);
+            finish();
+        });
+
         vmodel = new ViewModelProvider(this).get(TransactionViewModel.class);
-
-
 
         vmodel.getAllTransactions().observe(this,transactions ->{
             if(transactions == null || transactions.isEmpty()){
+                adapter.setTransactions(new ArrayList<>());
                 return;
             }
+            adapter.setTransactions(transactions);
 
-            StringBuilder sb = new StringBuilder();
-            for(Transactions t : transactions){
-                sb.append("type: ").append(t.getType()).append("\n")
-                        .append("name: ").append(t.getName()).append("\n")
-                        .append("amount: ").append(t.getAmount()).append("\n");
-
-            }
-            showtransaction.setText(sb.toString());
         });
-
-
-
     }
 }
