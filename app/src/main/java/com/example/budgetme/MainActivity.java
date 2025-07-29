@@ -47,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this,EmailPasswordActivity.class);
             startActivity(intent);
         });
+        Button btnBudget = findViewById(R.id.btnBudget);
+        btnBudget.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, BudgetActivity.class);
+            startActivity(intent);
+        });
+
 
         showtransaction = findViewById(R.id.show_transaction);
         vmodel = new ViewModelProvider(this).get(TransactionViewModel.class);
@@ -67,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
             showtransaction.setText(sb.toString());
         });
-        Button btnBudget = findViewById(R.id.btnBudget); // Make sure this matches your button ID
+
 
         btnBudget.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, BudgetActivity.class);
