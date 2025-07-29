@@ -18,6 +18,8 @@
         <activity android:name=".MainActivity" android:exported = "false">
 
         </activity>
+        <activity android:name=".BudgetActivity" />
+
         <activity
             android:name=".EmailPasswordActivity"
             android:exported="true">
