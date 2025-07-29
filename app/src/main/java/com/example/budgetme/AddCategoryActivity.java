@@ -16,12 +16,12 @@ public class AddCategoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_category);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         editCategoryName = findViewById(R.id.edit_category_name);
         editIconName = findViewById(R.id.edit_emoji_input);
         saveButton = findViewById(R.id.button_save_category);
