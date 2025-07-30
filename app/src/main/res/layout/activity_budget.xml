@@ -140,12 +140,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Groceries"
+                        android:text="Housing"
                         android:textSize="14sp"
                         android:textColor="#666666" />
 
                     <EditText
-                        android:id="@+id/etGroceries"
+                        android:id="@+id/etHousing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="$0.00"
@@ -181,12 +181,98 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Entertainment"
+                        android:text="Transporation"
                         android:textSize="14sp"
                         android:textColor="#666666" />
 
                     <EditText
-                        android:id="@+id/etEntertainment"
+                        android:id="@+id/etTransporation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="$0.00"
+                        android:textSize="20sp"
+                        android:textColor="#7B1FA2"
+                        android:textStyle="bold"
+                        android:inputType="numberDecimal"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+        <!-- Row for Groceries and Entertainment -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <!-- Groceries Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:elevation="4dp"
+                android:radius="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="left"
+                    android:background="#FFF8E1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Food &amp; Dining"
+                        android:textSize="14sp"
+                        android:textColor="#666666" />
+
+                    <EditText
+                        android:id="@+id/etFoodDining"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="$0.00"
+                        android:textSize="20sp"
+                        android:textColor="#FF8F00"
+                        android:textStyle="bold"
+                        android:inputType="numberDecimal"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Entertainment Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:elevation="4dp"
+                android:radius="12dp">
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="left"
+                    android:background="#F3E5F5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Utilites"
+                        android:textSize="14sp"
+                        android:textColor="#666666" />
+
+                    <EditText
+                        android:id="@+id/etUtilites"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="$0.00"

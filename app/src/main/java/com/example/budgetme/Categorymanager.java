@@ -20,11 +20,14 @@ public class Categorymanager {
     private void initializeDefaultCategories() {
         //TODO: add default categories
 //        categories.add(new Category("Add Transaction", "ic_money"));
-        categories.add(new Category("Rent", "ic_mortgage"));
-        categories.add(new Category("Phone Bill", "ic_phone_squared"));
-        categories.add(new Category("Water Bill", "ic_piping"));
-        categories.add(new Category("Groceries", "ic_shopping"));
-        categories.add(new Category("Car Payment", "ic_car"));
+        categories.add(new Category("Housing", "ic_mortgage"));
+        categories.add(new Category("Utilities", "ic_piping"));
+        categories.add(new Category("Shopping", "ic_shopping"));
+        categories.add(new Category("Food & Dining", "ic_pizza"));
+        categories.add(new Category("Healthcare", "ic_person_at_home"));
+        categories.add(new Category("Travel", "ic_car"));
+        categories.add(new Category("Insurance", "ic_guarantee"));
+        categories.add(new Category("Miscellaneous", "ic_categorize"));
     }
 
     public void addCategory(Category category) {
