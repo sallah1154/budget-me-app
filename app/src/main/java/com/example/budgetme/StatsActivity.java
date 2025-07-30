@@ -62,16 +62,12 @@ public class StatsActivity extends AppCompatActivity {
             double totalIncome = 0.0;
             double totalExpense = 0.0;
 
-            // Clear the top places list before adding new items
+            //Clear items
             topPlacesList.removeAllViews();
 
-            // For pie chart entries
             List<PieEntry> pieEntries = new ArrayList<>();
 
-            // Aggregate amounts per category for pie chart
-            // You can customize this to aggregate by category or transaction name if you want.
-            // For simplicity, we'll add individual expenses as pie slices.
-
+            //get transactions info
             for (Transactions t : transactions) {
                 if ("expense".equalsIgnoreCase(t.getType())) {
                     totalExpense += t.getAmount();
@@ -87,7 +83,6 @@ public class StatsActivity extends AppCompatActivity {
                 }
             }
 
-            // Update UI texts
             expenseAmount.setText(String.format("$%.2f", totalExpense));
             incomeAmount.setText(String.format("$%.2f", totalIncome));
             totalSpentValue.setText(String.format("$%.2f", totalExpense));

@@ -1,8 +1,10 @@
 package com.example.budgetme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,6 +44,13 @@ public class BudgetActivity extends AppCompatActivity {
         etMonthlyBudget.addTextChangedListener(watcher);
         etGroceries.addTextChangedListener(watcher);
         etEntertainment.addTextChangedListener(watcher);
+
+        //stats button
+        Button btnBudget = findViewById(R.id.btnStats);
+        btnBudget.setOnClickListener(v -> {
+            Intent intent = new Intent(BudgetActivity.this, StatsActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void updateRemainingBudget() {
