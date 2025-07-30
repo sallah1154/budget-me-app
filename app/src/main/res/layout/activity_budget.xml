@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#E8F5E8"
     android:padding="16dp">
 
@@ -23,24 +24,25 @@
         <!-- Monthly Budget Card -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="160dp"
             android:layout_marginBottom="16dp"
             android:elevation="4dp"
             android:radius="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:background="#FFFAF0"
                 android:gravity="center"
-                android:background="#FFFAF0">
+                android:orientation="vertical"
+                >
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Monthly Budget"
-                    android:textSize="16sp"
-                    android:textColor="#666666" />
+                    android:textColor="#666666"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/etMonthlyBudget"
@@ -53,6 +55,21 @@
                     android:textColor="#1976D2"
                     android:textSize="32sp"
                     android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/save_budget_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="save budget"
+                    >
+
+                </Button>
+                <TextView
+                    android:id="@+id/monthly_budget_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="current monthly budget"/>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -65,11 +82,15 @@
             android:radius="12dp">
 
             <LinearLayout
+                android:id="@+id/plinearlayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="left"
                 android:background="#FFEBEE">
+
+
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -143,6 +164,11 @@
                 android:layout_marginStart="8dp"
                 android:elevation="4dp"
                 android:radius="12dp">
+
+
+
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

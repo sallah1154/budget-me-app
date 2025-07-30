@@ -18,10 +18,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private TransactionViewModel vmodel;
     private transactionAdaptor adapter;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         TextView totalBudgetText = findViewById(R.id.summary_total_budget);
         TextView spentText = findViewById(R.id.summary_spent);
         TextView remainingText = findViewById(R.id.summary_remaining);
+
 
         // Initialize RecyclerView and adapter
         RecyclerView recyclerView = findViewById(R.id.transaction_recycler_view);
@@ -75,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
 
         vmodel = new ViewModelProvider(this).get(TransactionViewModel.class);
 
+
+
+
+
         vmodel.getAllTransactions().observe(this,transactions ->{
             if(transactions == null || transactions.isEmpty()){
                 adapter.setTransactions(new ArrayList<>());
@@ -83,5 +92,7 @@ public class MainActivity extends AppCompatActivity {
             adapter.setTransactions(transactions);
 
         });
+
+
     }
 }

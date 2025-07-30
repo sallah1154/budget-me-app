@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.util.Date;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -98,7 +99,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                 return;
             }
 
-            Transactions transaction = new Transactions(type,transactionname,damount,selectedCategory);
+            Transactions transaction = new Transactions(type,transactionname,damount,selectedCategory,new Date());
             tViewModel.insert(transaction);
 
             Toast.makeText(this,"Transaction added",Toast.LENGTH_LONG).show();
