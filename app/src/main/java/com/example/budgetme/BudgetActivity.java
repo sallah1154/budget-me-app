@@ -6,11 +6,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 public class BudgetActivity extends AppCompatActivity {
 
     private EditText etMonthlyBudget, etTotalSpent, etGroceries, etEntertainment, etRemaining;
+    private Button saveBudgetButton;
+    TextView currentmbudget;
+    private BudgetViewModel budgetVModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,8 @@ public class BudgetActivity extends AppCompatActivity {
         etGroceries = findViewById(R.id.etGroceries);
         etEntertainment = findViewById(R.id.etEntertainment);
         etRemaining = findViewById(R.id.etRemaining);
+        saveBudgetButton = findViewById(R.id.save_budget_button);
+        currentmbudget = findViewById(R.id.monthly_budget_view);
 
         // Add listeners to auto-update values
         TextWatcher watcher = new TextWatcher() {
@@ -50,6 +58,38 @@ public class BudgetActivity extends AppCompatActivity {
         btnBudget.setOnClickListener(v -> {
             Intent intent = new Intent(BudgetActivity.this, StatsActivity.class);
             startActivity(intent);
+        });
+
+        budgetVModel = new ViewModelProvider(this).get(BudgetViewModel.class);
+
+        budgetVModel.getRmonthlybudget().observe(this,currentbudget->{
+            if(currentbudget !=null){
+                currentmbudget.setText("current monthly budget $"+currentbudget);
+
+            } else {
+                currentmbudget.setText("No budget set");
+            }
+
+        });
+
+
+        saveBudgetButton.setOnClickListener(v->{
+
+            String monthlyBudget = etMonthlyBudget.getText().toString();
+            if(!monthlyBudget.isEmpty()){
+                Double dMonthlyBudget = Double.parseDouble(monthlyBudget);
+                Budget mbudget = new Budget(dMonthlyBudget);
+                budgetVModel.insert(mbudget);
+
+            }
+
+
+
+
+
+
+
+
         });
     }
 
