@@ -42,11 +42,12 @@ public class Transactions {
 
     }
 @Ignore
-    public Transactions(String type, String name, double amount,Category category){
+    public Transactions(String type, String name, double amount,Category category, Date date){
         this.type = type;
         this.amount = amount;
         this.name = name;
         this.category = category;
+        this.date = date;
     }
 
     public String getType() {

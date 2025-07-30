@@ -11,10 +11,12 @@ public class TransactionRepository {
     private TransactionDao transactionDao;
     private LiveData<List<Transactions>>allTransactions;
 
+
     public TransactionRepository(Application application){
         appDatabase db = appDatabase.getDatabase(application);
         transactionDao = db.transactionDao();
         allTransactions = db.transactionDao().getAllTransactions();
+
     }
 
 

@@ -3,12 +3,24 @@ package com.example.budgetme;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import java.util.Date;
 
 public class BudgetActivity extends AppCompatActivity {
 
     private EditText etMonthlyBudget, etTotalSpent, etGroceries, etEntertainment, etRemaining;
+    private Button saveBudgetButton;
+    TextView currentmbudget;
+    private BudgetViewModel budgetVModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +36,9 @@ public class BudgetActivity extends AppCompatActivity {
         etGroceries = findViewById(R.id.etGroceries);
         etEntertainment = findViewById(R.id.etEntertainment);
         etRemaining = findViewById(R.id.etRemaining);
+        saveBudgetButton = findViewById(R.id.save_budget_button);
+        currentmbudget = findViewById(R.id.monthly_budget_view);
+
 
         // Add listeners to auto-update values
         TextWatcher watcher = new TextWatcher() {
@@ -42,6 +57,37 @@ public class BudgetActivity extends AppCompatActivity {
         etMonthlyBudget.addTextChangedListener(watcher);
         etGroceries.addTextChangedListener(watcher);
         etEntertainment.addTextChangedListener(watcher);
+
+        budgetVModel = new ViewModelProvider(this).get(BudgetViewModel.class);
+
+        budgetVModel.getRmonthlybudget().observe(this,currentbudget->{
+            if(currentbudget !=null){
+                currentmbudget.setText("current monthly budget $"+currentbudget);
+
+            } else {
+                currentmbudget.setText("No budget set");
+            }
+
+        });
+
+        saveBudgetButton.setOnClickListener(v->{
+
+            String monthlyBudget = etMonthlyBudget.getText().toString();
+            if(!monthlyBudget.isEmpty()){
+                Double dMonthlyBudget = Double.parseDouble(monthlyBudget);
+                Budget mbudget = new Budget(dMonthlyBudget);
+                budgetVModel.insert(mbudget);
+
+            }
+
+
+
+
+
+
+
+
+        });
     }
 
     private void updateRemainingBudget() {
