@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class TransactionViewModel extends AndroidViewModel {
@@ -22,11 +20,14 @@ public class TransactionViewModel extends AndroidViewModel {
         allTransactions = repo.getAllTransactions();
     }
 
-
-
     public LiveData<List<Transactions>>getAllTransactions(){
         return allTransactions;
     }
+
+    public LiveData<List<Transactions>>getTransactionsMonth(){
+        return repo.getTransactionsMonth();
+    }
+
 
     void insert(Transactions transaction){
         repo.insert(transaction);
