@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,11 +105,29 @@ public class MainActivity extends AppCompatActivity {
 
         budgetVModel.getRmonthlybudget().observe(this,currentbudget->{
             if(currentbudget!=null){
-                totalBudgetText.setText("Total Budget: "+currentbudget);
+                totalBudgetText.setText("Total Budget: $"+currentbudget);
+                vmodel.getTransactionsMonth().observe(this,transactions->{
+                    double totalSpent =0.0;
+
+                    for(Transactions t :transactions){
+                        if("Expense".equalsIgnoreCase(t.getType())){
+                            totalSpent +=t.getAmount();
+                        }
+
+                    }
+                    double remaining = currentbudget - totalSpent;
+
+                    spentText.setText((String.format("Total Spent: $%.2f",totalSpent)));
+                    remainingText.setText((String.format("Remaining budget $%.2f",remaining)));
+                });
             } else {
                 totalBudgetText.setText("Total Budget: ");
             }
+
+
         });
+
+
 
 
     }
