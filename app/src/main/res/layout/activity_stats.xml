@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#b078ff"
+    android:background="#e9daff"
     tools:context=".StatsActivity">
 
     <TextView
@@ -41,7 +41,7 @@
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChart"
                 android:layout_width="match_parent"
-                android:layout_height="245dp"
+                android:layout_height="257dp"
                 tools:layout_editor_absoluteX="-5dp"
                 tools:layout_editor_absoluteY="341dp" />
 
@@ -91,7 +91,7 @@
             android:id="@+id/expenseAmount"
             android:layout_width="69dp"
             android:layout_height="match_parent"
-            android:textColor="#6200EE"
+            android:textColor="#ff6750a4"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

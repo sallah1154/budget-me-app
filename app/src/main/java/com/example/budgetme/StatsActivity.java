@@ -73,7 +73,11 @@ public class StatsActivity extends AppCompatActivity {
                     totalExpense += t.getAmount();
 
                     // Add each expense as a slice on pie chart
-                    pieEntries.add(new PieEntry((float) t.getAmount(), t.getName()));
+                    //pieEntries.add(new PieEntry((float) t.getAmount(), t.getName()));
+                    if (t.getCategory() != null) {
+                        pieEntries.add(new PieEntry((float) t.getAmount(), t.getCategory().toString()));
+                    }
+
 
                     // Add to top places list
                     addTopPlace(t.getName(), String.format("$%.2f", t.getAmount()));
@@ -88,9 +92,7 @@ public class StatsActivity extends AppCompatActivity {
             totalSpentValue.setText(String.format("$%.2f", totalExpense));
             centerText.setText(String.format("$%.2f", totalExpense));
 
-            // Calculate safe to spend
-            // You can customize the logic here based on your monthly budget, for example:
-            // For demonstration, safeToSpend = income - expense
+            //Calculate safe to spend
             double safeToSpend = totalIncome - totalExpense;
             if (safeToSpend < 0) {
                 safeToSpendValue.setText("Over Budget");
@@ -129,7 +131,7 @@ public class StatsActivity extends AppCompatActivity {
 
             Legend legend = pieChart.getLegend();
             legend.setEnabled(true);
-            legend.setTextSize(16f);
+            legend.setTextSize(15f);
             legend.setFormSize(14f);
             legend.setForm(Legend.LegendForm.CIRCLE);
             legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
