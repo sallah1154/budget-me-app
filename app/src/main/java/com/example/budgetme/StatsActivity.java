@@ -8,12 +8,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.example.budgetme.Transactions;
+import com.example.budgetme.Budget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ public class StatsActivity extends AppCompatActivity {
     private TextView centerText, totalSpentValue, safeToSpendValue, expenseAmount, incomeAmount;
     private LinearLayout topPlacesList;
     private TransactionViewModel vmodel;
+    private BudgetViewModel budgetViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class StatsActivity extends AppCompatActivity {
         incomeAmount = findViewById(R.id.incomeAmount);
 
         vmodel = new ViewModelProvider(this).get(TransactionViewModel.class);
+        budgetViewModel = new ViewModelProvider(this).get(BudgetViewModel.class);
 
         vmodel.getAllTransactions().observe(this, transactions -> {
             if (transactions == null || transactions.isEmpty()) {
@@ -72,7 +76,7 @@ public class StatsActivity extends AppCompatActivity {
                 if ("expense".equalsIgnoreCase(t.getType())) {
                     totalExpense += t.getAmount();
 
-                    // Add each expense as a slice on pie chart
+                    //Add each expense as a slice on pie chart
                     //pieEntries.add(new PieEntry((float) t.getAmount(), t.getName()));
                     if (t.getCategory() != null) {
                         pieEntries.add(new PieEntry((float) t.getAmount(), t.getCategory().toString()));
@@ -92,15 +96,27 @@ public class StatsActivity extends AppCompatActivity {
             totalSpentValue.setText(String.format("$%.2f", totalExpense));
             centerText.setText(String.format("$%.2f", totalExpense));
 
-            //Calculate safe to spend
+            /*Calculate safe to spend
             double safeToSpend = totalIncome - totalExpense;
             if (safeToSpend < 0) {
                 safeToSpendValue.setText("Over Budget");
             } else {
                 safeToSpendValue.setText(String.format("$%.2f", safeToSpend));
             }
+             */
+            final double finalTotalExpense = totalExpense;
 
-            // Setup pie chart with dynamic data
+            budgetViewModel.getRmonthlybudget().observe(this, budgetAmount -> {
+                if (budgetAmount != null) {
+                    double safeToSpend = budgetAmount - finalTotalExpense;
+                    safeToSpendValue.setText(safeToSpend < 0 ? "Over Budget" : String.format("$%.2f", safeToSpend));
+                } else {
+                    safeToSpendValue.setText("No Budget Set");
+                }
+            });
+
+
+            //Setup pie chart with data
             PieDataSet dataSet = new PieDataSet(pieEntries, "");
             dataSet.setColors(new int[] {
                     Color.parseColor("#473771"),
@@ -127,6 +143,7 @@ public class StatsActivity extends AppCompatActivity {
             pieChart.getDescription().setEnabled(false);
             pieChart.setEntryLabelColor(Color.BLACK);
             pieChart.setEntryLabelTextSize(13f);
+            pieChart.animateY(1000, Easing.EaseInOutQuad);
             pieChart.invalidate();
 
             Legend legend = pieChart.getLegend();

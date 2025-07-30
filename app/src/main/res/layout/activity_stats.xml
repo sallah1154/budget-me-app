@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e9daff"
+    android:background="#ffffff"
     tools:context=".StatsActivity">
 
     <TextView
@@ -146,15 +146,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:backgroundTint="#ff6750a4"
+            android:background="#6200EE"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total Spent"
-                android:textColor="#6200EE"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -163,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textColor="#ff6750a4"
+                android:textColor="#A79FDB"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -172,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Safe to Spend"
-                android:textColor="#6200EE"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -181,7 +181,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textColor="#9180c1"
+                android:textColor="#A79FDB"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
