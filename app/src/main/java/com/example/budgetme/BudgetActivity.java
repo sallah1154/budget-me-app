@@ -50,7 +50,7 @@ public class BudgetActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                updateRemainingBudget();
+               // updateRemainingBudget();
             }
 
             @Override
@@ -79,16 +79,29 @@ public class BudgetActivity extends AppCompatActivity {
 
                 transactionVModel.getTransactionsMonth().observe(this, transactions -> {
                     double totalSpent = 0.0;
-                    Map<String, Double> categoryTotals = new HashMap<>();
+                    double housingTotal = 0.0;
+                    double transporationTotal = 0.0;
+                    double foodDiningTotal = 0.0;
+                    double utilitiesTotal = 0.0;
 
                     if (transactions != null) {
                         for (Transactions t : transactions) {
                             if ("Expense".equalsIgnoreCase(t.getType())) {
-                                totalSpent += t.getAmount();
-                                if(t.getCategory() != null){
-                                    String categoryName = t.getCategory().getName();
-                                    double current = categoryTotals.getOrDefault(categoryName,0.0);
-                                    categoryTotals.put(categoryName, current + t.getAmount());
+                                double amount = t.getAmount();
+                                totalSpent += amount;
+
+                                if (t.getCategory() != null && t.getCategory().getName() != null) {
+                                    String categoryName = t.getCategory().getName().trim();
+
+                                    if (categoryName.equalsIgnoreCase("Housing")) {
+                                        housingTotal += amount;
+                                    } else if (categoryName.equalsIgnoreCase("Transportation")) {
+                                        transporationTotal += amount;
+                                    } else if (categoryName.equalsIgnoreCase("Food & Dining")) {
+                                        foodDiningTotal += amount;
+                                    } else if (categoryName.equalsIgnoreCase("Utilities")) {
+                                        utilitiesTotal += amount;
+                                    }
                                 }
                             }
                         }
@@ -98,19 +111,11 @@ public class BudgetActivity extends AppCompatActivity {
                     double remaining = currentbudget - totalSpent;
                     etRemaining.setText(String.format("$%.2f", remaining));
 
-                    // Sort and show top 4 categories in logs
-                    List<Map.Entry<String, Double>> sortedCategories = new ArrayList<>(categoryTotals.entrySet());
-                    sortedCategories.sort((a, b) -> Double.compare(b.getValue(), a.getValue()));
+                    etHousing.setText(String.format("$%.2f", housingTotal));
+                    etTransporation.setText(String.format("$%.2f", transporationTotal));
+                    etFoodDining.setText(String.format("$%.2f", foodDiningTotal));
+                    etUtilites.setText(String.format("$%.2f", utilitiesTotal));
 
-                    int topLimit = Math.min(4, sortedCategories.size());
-                    for (int i = 0; i < topLimit; i++) {
-                        Map.Entry<String, Double> entry = sortedCategories.get(i);
-                        android.util.Log.d("TopCategories", entry.getKey() + ": $" + String.format("%.2f", entry.getValue()));
-                    }
-                    if (topLimit > 0) etHousing.setText(String.format("$%.2f", sortedCategories.get(0).getValue()));
-                    if (topLimit > 1) etTransporation.setText(String.format("$%.2f", sortedCategories.get(1).getValue()));
-                    if (topLimit > 2) etFoodDining.setText(String.format("$%.2f", sortedCategories.get(2).getValue()));
-                    if (topLimit > 3) etUtilites.setText(String.format("$%.2f", sortedCategories.get(3).getValue()));
                 });
 
             } else {
