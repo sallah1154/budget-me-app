@@ -14,6 +14,9 @@ public interface TransactionDao{
     @Query("SELECT * FROM Transactions")
     LiveData<List<Transactions>> getAllTransactions();
 
+    @Query("SELECT * FROM Transactions WHERE date >= :pastdate")
+    LiveData<List<Transactions>>getTransactionsMonth(Date pastdate);
+
     @Insert
     void insertTransaction(Transactions transaction );
 
