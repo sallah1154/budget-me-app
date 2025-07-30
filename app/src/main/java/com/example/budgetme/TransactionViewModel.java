@@ -29,11 +29,15 @@ public class TransactionViewModel extends AndroidViewModel {
     }
 
 
+
     void insert(Transactions transaction){
         repo.insert(transaction);
     }
     void delete(Transactions transaction){
         repo.delete(transaction);
     }
+
+
+
 
 }

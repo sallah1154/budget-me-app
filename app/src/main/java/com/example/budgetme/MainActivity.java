@@ -24,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
     private TransactionViewModel vmodel;
     private transactionAdaptor adapter;
 
+    private BudgetViewModel budgetVModel;
+
+
+
+
+
 
 
 
@@ -91,6 +97,16 @@ public class MainActivity extends AppCompatActivity {
             }
             adapter.setTransactions(transactions);
 
+        });
+
+        budgetVModel = new ViewModelProvider(this).get(BudgetViewModel.class);
+
+        budgetVModel.getRmonthlybudget().observe(this,currentbudget->{
+            if(currentbudget!=null){
+                totalBudgetText.setText("Total Budget: "+currentbudget);
+            } else {
+                totalBudgetText.setText("Total Budget: ");
+            }
         });
 
 

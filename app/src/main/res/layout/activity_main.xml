@@ -24,13 +24,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:id="@+id/summary_total_budget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Budget"
+                android:text="Total Budget: "
                 android:textSize="16sp"
                 android:layout_marginBottom="12dp"
                 android:textStyle="bold" />
